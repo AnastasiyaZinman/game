@@ -1,0 +1,47 @@
+body{
+    background-image: url("ocean.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    color: #1da8bb;
+    text-align: center;    
+  }
+  .rect{
+      position: relative;
+      visibility: hidden;
+      left: 0;
+      top: 0;
+      width: 80px;
+      height: 80px;
+      overflow:hidden;
+      /* background-color: rgb(235, 52, 20); */
+  }
+  img {
+     margin: 0 auto;
+      width:100%;
+      height: 100%;
+  }
+  .container {
+    box-sizing: content-box;
+    position: relative;
+    height: 750px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+    .timer {
+    box-sizing: content-box;
+    position: absolute;
+    width: 500px;
+    height: 400px;
+    text-align: center;
+    margin: 300px 30%;
+    }
+    .text {
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 50px;
+}

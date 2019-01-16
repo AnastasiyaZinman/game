@@ -10,7 +10,7 @@ body{
     text-align: center;    
   }
   .rect{
-      position: relative;
+      position: absolute;
       visibility: hidden;
       left: 0;
       top: 0;
@@ -27,13 +27,13 @@ body{
   .container {
     box-sizing: content-box;
     position: relative;
-    height: 750px;
+    height: 100%;
     margin: 0 auto;
     width: 100%;
   }
 
     .timer {
-    box-sizing: content-box;
+    box-sizing: border-box;
     position: absolute;
     width: 500px;
     height: 400px;

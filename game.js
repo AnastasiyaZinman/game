@@ -1,9 +1,7 @@
 $(document).ready(function () {
     let tick = 5;
     var count = 0, level = 1;
-
     Timer(tick);
-
     function Timer(tick) {
     var TimerCount = setInterval(myTimer, 1000);
 
@@ -19,12 +17,11 @@ $(document).ready(function () {
             clearInterval(TimerCount);
             $("#text").hide();
             $(".timer").hide();
-            objectAppearance();
+            let timerId =timerForClick()
+            objectAppearance(timerId);
         }
     }
 }
-    
-
     function levelMessage (level) {
         $("#text").empty(); $(".timer").empty();
         $("#text").show(); $(".timer").show();
@@ -47,47 +44,53 @@ $(document).ready(function () {
     return Math.floor((Math.random()*5)+1);
     }
 
-    function CreateObj (x, y){
+    function CreateObj (x, y,timerId){
         image = RandomImage();
         var $rect = $("<div class='rect'>"+  "<img src='" + image + ".png' />" +"</div>");
         $rect.css({ "left": x, "top": y });
         $rect.css("visibility", "visible");  
         $('.container').append($rect).fadeIn(500);
-        bindEvents($rect);
+        bindEvents($rect,timerId);
     }  
     
-    function bindEvents($rect) {
+    function bindEvents($rect,timerId) {
         $rect.on('click',function () { 
         console.log(this); 
         $(this).off('click');
         $(this).remove();
         count+=1; console.log("count",count,"level",level);
-        CheckCount(count);
+        CheckCount(count,timerId);
         });
     }
     //-------------------------------------MAIN------------------------------
-    function objectAppearance() {
+    function objectAppearance(timerId) {
         count = 0;
         let docSize = getWindowSize();
         // debugger;
         for (let i=1; i <= level; i++) {
         let randomXY = getXY(docSize.docWidth, docSize.docHeight);
         console.log(randomXY.randomX, randomXY.randomY);
-        CreateObj(randomXY.randomX, randomXY.randomY);
+        CreateObj(randomXY.randomX, randomXY.randomY,timerId);
         }
     };
 
     //-----------------------------------------------------------------------
-    function CheckCount (count) {
+        function timerForClick(){
+        return timerId =setTimeout(function() {
+            alert("Your time is passed");
+            $('div.rect').remove()
+            tick = levelMessage (1);
+            Timer(tick);
+        }, 3000);
+        // clearTimeout(timerId);
+        }
+        function CheckCount (count,timerId) {
         console.log("count Check",count,"level",level);
        if (count === level) {
+        clearTimeout(timerId);
         level += 1;
         tick = levelMessage (level);
         Timer(tick);
         }
     }
-
- 
-
-
 })

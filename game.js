@@ -1,10 +1,10 @@
 $(document).ready(function () {
     let tick = 5;
     var count = 0, level = 1;
-    Timer(tick);
-    function Timer(tick) {
-    var TimerCount = setInterval(myTimer, 1000);
+    Timer(tick,level);
 
+    function Timer(tick,level) {
+    var TimerCount = setInterval(myTimer, 1000);
     function myTimer() {
         if (tick === 5) {
            tick = levelMessage(level);
@@ -18,7 +18,7 @@ $(document).ready(function () {
             $("#text").hide();
             $(".timer").hide();
             let timerId =timerForClick()
-            objectAppearance(timerId);
+            objectAppearance(timerId,level);
         }
     }
 }
@@ -63,12 +63,12 @@ $(document).ready(function () {
         });
     }
     //-------------------------------------MAIN------------------------------
-    function objectAppearance(timerId) {
+    function objectAppearance(timerId, level) {
         count = 0;
         let docSize = getWindowSize();
-        // debugger;
+        debugger;
         for (let i=1; i <= level; i++) {
-        let randomXY = getXY(docSize.docWidth, docSize.docHeight);
+        let randomXY = getXY(docSize.docWidth-50, docSize.docHeight-50);
         console.log(randomXY.randomX, randomXY.randomY);
         CreateObj(randomXY.randomX, randomXY.randomY,timerId);
         }
@@ -80,7 +80,8 @@ $(document).ready(function () {
             alert("Your time is passed");
             $('div.rect').remove()
             tick = levelMessage (1);
-            Timer(tick);
+            level=1;
+            Timer(tick,level);
         }, 3000);
         // clearTimeout(timerId);
         }
@@ -90,7 +91,7 @@ $(document).ready(function () {
         clearTimeout(timerId);
         level += 1;
         tick = levelMessage (level);
-        Timer(tick);
+        Timer(tick,level);
         }
     }
 })
